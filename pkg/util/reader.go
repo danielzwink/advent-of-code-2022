@@ -5,7 +5,16 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 )
+
+func TextAsNumber(text string) (int, bool) {
+	number, err := strconv.Atoi(text)
+	if err != nil {
+		return 0, false
+	}
+	return number, true
+}
 
 func ReadFile(day string) []string {
 	fileName := fmt.Sprintf("../../../assets/puzzles/%s.txt", day)
