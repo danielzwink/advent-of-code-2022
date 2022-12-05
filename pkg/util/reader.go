@@ -8,12 +8,20 @@ import (
 	"strconv"
 )
 
-func TextAsNumber(text string) (int, bool) {
+func ParseInt(text string) (int, bool) {
 	number, err := strconv.Atoi(text)
 	if err != nil {
 		return 0, false
 	}
 	return number, true
+}
+
+func MustParseInt(text string) int {
+	number, err := strconv.Atoi(text)
+	if err != nil {
+		panic(1)
+	}
+	return number
 }
 
 func ReadFile(day string) []string {

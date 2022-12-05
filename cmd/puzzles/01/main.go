@@ -35,7 +35,7 @@ func getCaloriesPerElf(day string) []int {
 
 	sum := 0
 	for _, line := range lines {
-		number, valid := util.TextAsNumber(line)
+		number, valid := util.ParseInt(line)
 
 		if valid {
 			sum += number
