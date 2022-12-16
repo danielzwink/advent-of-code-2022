@@ -24,6 +24,11 @@ func MustParseInt(text string) int {
 	return number
 }
 
+func AsciiValue(char rune) int {
+	ascii := fmt.Sprintf("%d", char)
+	return MustParseInt(ascii)
+}
+
 func ReadFile(day string) []string {
 	fileName := fmt.Sprintf("../../../assets/puzzles/%s.txt", day)
 

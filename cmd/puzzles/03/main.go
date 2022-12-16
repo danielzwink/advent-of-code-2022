@@ -4,7 +4,6 @@ import (
 	"advent-of-code-2022/cmd/puzzles/03/types"
 	"advent-of-code-2022/pkg/util"
 	"fmt"
-	"strconv"
 	"unicode"
 )
 
@@ -36,13 +35,12 @@ func part2() int {
 }
 
 func priority(item rune) int {
-	ascii := fmt.Sprintf("%d", item)
-	value, _ := strconv.Atoi(ascii)
+	asciiValue := util.AsciiValue(item)
 
 	if unicode.IsLower(item) {
-		return value - 96
+		return asciiValue - 96
 	} else if unicode.IsUpper(item) {
-		return value - 38
+		return asciiValue - 38
 	}
 	panic(1)
 }
