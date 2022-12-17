@@ -29,6 +29,13 @@ func AsciiValue(char rune) int {
 	return MustParseInt(ascii)
 }
 
+func Sort(a, b int) (int, int) {
+	if a <= b {
+		return a, b
+	}
+	return b, a
+}
+
 func ReadFile(day string) []string {
 	fileName := fmt.Sprintf("../../../assets/puzzles/%s.txt", day)
 
