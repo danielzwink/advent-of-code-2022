@@ -47,6 +47,13 @@ func Sort(a, b int) (int, int) {
 	return b, a
 }
 
+func Abs(a int) int {
+	if a < 0 {
+		return a * -1
+	}
+	return a
+}
+
 func ReadFile(day string) []string {
 	fileName := fmt.Sprintf("../../../assets/puzzles/%s.txt", day)
 
