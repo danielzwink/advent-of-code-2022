@@ -29,6 +29,17 @@ func AsciiValue(char rune) int {
 	return MustParseInt(ascii)
 }
 
+func EvaluateMinAndMax(currentMin, currentMax, value int) (int, int) {
+	if value < currentMin && value > currentMax {
+		return value, value
+	} else if value < currentMin {
+		return value, currentMax
+	} else if value > currentMax {
+		return currentMin, value
+	}
+	return currentMin, currentMax
+}
+
 func Sort(a, b int) (int, int) {
 	if a <= b {
 		return a, b
