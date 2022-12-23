@@ -2,6 +2,7 @@ package main
 
 import (
 	"advent-of-code-2022/cmd/puzzles/14/types"
+	t "advent-of-code-2022/pkg/types"
 	"advent-of-code-2022/pkg/util"
 	"fmt"
 	"math"
@@ -40,12 +41,12 @@ func readCave(day string, endless bool) *types.Cave {
 	xMax, yMax := math.MinInt, math.MinInt
 
 	// read rock coordinates, calculate min/max
-	rocks := make([]*types.Coordinate, 0)
+	rocks := make([]*t.Coordinate, 0)
 	for _, line := range lines {
 		pointValues := strings.Split(line, " -> ")
 		for i := 0; i < len(pointValues)-1; i++ {
-			from := types.NewCoordinateFromString(pointValues[i])
-			to := types.NewCoordinateFromString(pointValues[i+1])
+			from := t.NewCoordinateCommaSeparated(pointValues[i])
+			to := t.NewCoordinateCommaSeparated(pointValues[i+1])
 			points := singlePointsFromLine(from, to)
 			rocks = append(rocks, points...)
 
@@ -65,9 +66,9 @@ func readCave(day string, endless bool) *types.Cave {
 	return types.NormalisedCave(rocks, xMin, xMax, yMax, endless)
 }
 
-func singlePointsFromLine(from, to *types.Coordinate) []*types.Coordinate {
+func singlePointsFromLine(from, to *t.Coordinate) []*t.Coordinate {
 	length := int(math.Max(math.Abs(float64(from.X-to.X)), math.Abs(float64(from.Y-to.Y)))) + 1
-	line := make([]*types.Coordinate, 0, length)
+	line := make([]*t.Coordinate, 0, length)
 	line = append(line, from)
 
 	if from.X == to.X && from.Y == to.Y {
@@ -75,20 +76,13 @@ func singlePointsFromLine(from, to *types.Coordinate) []*types.Coordinate {
 	} else if from.X == to.X {
 		start, end := util.Sort(from.Y, to.Y)
 		for i := start; i <= end; i++ {
-			line = append(line, types.NewCoordinate(from.X, i))
+			line = append(line, t.NewCoordinate(from.X, i))
 		}
 	} else if from.Y == to.Y {
 		start, end := util.Sort(from.X, to.X)
 		for i := start; i <= end; i++ {
-			line = append(line, types.NewCoordinate(i, from.Y))
+			line = append(line, t.NewCoordinate(i, from.Y))
 		}
 	}
 	return line
-}
-
-func sort(a, b int) (int, int) {
-	if a <= b {
-		return a, b
-	}
-	return b, a
 }
